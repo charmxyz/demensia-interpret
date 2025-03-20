@@ -81,7 +81,7 @@ export default function DementiaRiskCalculator() {
         recommendation: `❌ ${test.name} could provide additional information but is not strongly recommended.`,
         details: `Patient Age: ${patientAge}\n` +
                 `Baseline Risk: ${formatPercentage(baselineRisk)}%\n` +
-                `Doctor's Estimated Probability: ${formatPercentage(risk)}%\n` +
+                `Doctor&apos;s Estimated Probability: ${formatPercentage(risk)}%\n` +
                 `Adjusted Pre-Test Probability: ${formatPercentage(adjustedRisk)}%\n\n` +
                 `Selected Test: ${test.name}\n` +
                 `Test Threshold: ${test.threshold}%\n` +
@@ -106,7 +106,7 @@ export default function DementiaRiskCalculator() {
     // Format details
     let details = `Patient Age: ${patientAge}\n`;
     details += `Baseline Risk: ${formatPercentage(baselineRisk)}%\n`;
-    details += `Doctor's Estimated Probability: ${formatPercentage(risk)}%\n`;
+    details += `Doctor&apos;s Estimated Probability: ${formatPercentage(risk)}%\n`;
     details += `Adjusted Pre-Test Probability: ${formatPercentage(adjustedRisk)}%\n\n`;
     
     details += `Selected Test: ${test.name}\n`;
@@ -129,7 +129,7 @@ export default function DementiaRiskCalculator() {
         <div className="bg-white rounded-lg shadow-md p-6 space-y-6">
           <div>
             <label htmlFor="initialRisk" className="block text-sm font-medium text-gray-700 mb-2">
-              Doctor's Estimated Dementia Probability (%)
+              Doctor&apos;s Estimated Dementia Probability (%)
             </label>
             <input
               type="number"
@@ -143,7 +143,7 @@ export default function DementiaRiskCalculator() {
 
           <div>
             <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
-              Patient's Age
+              Patient&apos;s Age
             </label>
             <input
               type="number"
@@ -151,7 +151,7 @@ export default function DementiaRiskCalculator() {
               value={age}
               onChange={(e) => setAge(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-              placeholder="Enter patient's age"
+              placeholder="Enter patient&apos;s age"
             />
           </div>
 
