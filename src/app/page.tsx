@@ -132,11 +132,18 @@ export default function DementiaRiskCalculator() {
   };
 
   return (
-    <main className="min-h-screen p-8 bg-gray-50">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">Dementia Risk Calculator</h1>
-        
-        <div className="bg-white rounded-lg shadow-md p-6 space-y-6">
+    <main className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Dementia Risk Calculator
+          </h1>
+          <p className="text-lg text-gray-600">
+            Calculate and interpret dementia risk based on test results
+          </p>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-lg p-6 space-y-6">
           <div>
             <label htmlFor="initialRisk" className="block text-sm font-medium text-gray-700 mb-1">
               Doctor Estimated Dementia Probability (%)
@@ -149,7 +156,7 @@ export default function DementiaRiskCalculator() {
               min="0"
               max="100"
               step="0.1"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-gray-900"
               placeholder="Enter probability (0-100)"
             />
           </div>
@@ -165,22 +172,22 @@ export default function DementiaRiskCalculator() {
               onChange={(e) => setAge(Number(e.target.value))}
               min="0"
               max="120"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-gray-900"
               placeholder="Enter patient age"
             />
           </div>
 
           <div>
-            <label htmlFor="bloodTest" className="block text-sm font-medium text-gray-700 mb-2">
-              Dementia Test Selection
+            <label htmlFor="test" className="block text-sm font-medium text-gray-700 mb-1">
+              Select Blood Test
             </label>
             <select
-              id="bloodTest"
+              id="test"
               value={selectedTest}
               onChange={(e) => setSelectedTest(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-gray-900"
             >
-              <option value="">Select a dementia test</option>
+              <option value="">Select a test...</option>
               {BLOOD_TESTS.map((test) => (
                 <option key={test.name} value={test.name}>
                   {test.name}
@@ -191,16 +198,16 @@ export default function DementiaRiskCalculator() {
 
           <button
             onClick={calculateRisk}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium"
           >
-            Calculate
+            Calculate Risk
           </button>
 
           {result && (
-            <div className="mt-6 space-y-4">
-              <div className="p-4 bg-blue-50 rounded-md border border-blue-200">
-                <h2 className="text-lg font-semibold text-blue-800 mb-2">Recommendation</h2>
-                <p className="text-blue-700">
+            <div className="space-y-4">
+              <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <h2 className="text-lg font-semibold text-blue-900 mb-2">Recommendation</h2>
+                <p className="text-blue-800">
                   {result.recommendation}{' '}
                   <RecommendationText 
                     isRecommended={result.recommendation.startsWith('[RECOMMENDED]')} 
@@ -208,8 +215,8 @@ export default function DementiaRiskCalculator() {
                 </p>
               </div>
               
-              <div className="p-4 bg-gray-50 rounded-md border border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">Details</h2>
+              <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">Details</h2>
                 <pre className="text-gray-700 whitespace-pre-wrap font-sans">{result.details}</pre>
               </div>
             </div>
