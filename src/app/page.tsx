@@ -16,11 +16,11 @@ const BLOOD_TESTS: BloodTest[] = [
   { name: 'Amyloid PET Scan', positiveLR: 12, negativeLR: 0.2, threshold: 5 },
 ];
 
-function RecommendationText({ testName, isRecommended }: { testName: string; isRecommended: boolean }) {
+function RecommendationText({ isRecommended }: { isRecommended: boolean }) {
   if (isRecommended) {
-    return <span>{testName} is recommended as it will significantly impact the diagnosis.</span>;
+    return <span>The dementia test is recommended as it will significantly impact the diagnosis.</span>;
   }
-  return <span>{testName} will provide additional information but is not strongly recommended.</span>;
+  return <span>The dementia test will provide additional information but is not strongly recommended.</span>;
 }
 
 export default function DementiaRiskCalculator() {
@@ -195,7 +195,6 @@ export default function DementiaRiskCalculator() {
                 <p className="text-blue-700">
                   {result.recommendation}{' '}
                   <RecommendationText 
-                    testName={selectedTest} 
                     isRecommended={result.recommendation.startsWith('[RECOMMENDED]')} 
                   />
                 </p>
