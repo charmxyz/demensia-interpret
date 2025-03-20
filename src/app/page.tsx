@@ -78,7 +78,7 @@ export default function DementiaRiskCalculator() {
     // Check if pre-test probability is below threshold
     if (adjustedRisk * 100 < test.threshold) {
       setResult({
-        recommendation: `[NOT RECOMMENDED] ${test.name} could provide additional information but is not strongly recommended.`,
+        recommendation: '[NOT RECOMMENDED] ' + test.name + ' could provide additional information but is not strongly recommended.',
         details: `Patient Age: ${patientAge}\n` +
                 `Baseline Risk: ${formatPercentage(baselineRisk)}%\n` +
                 `Doctor&apos;s Estimated Probability: ${formatPercentage(risk)}%\n` +
@@ -98,9 +98,9 @@ export default function DementiaRiskCalculator() {
     // Determine recommendation
     let recommendation = '';
     if (probabilityGap > 0.3) {
-      recommendation = `[RECOMMENDED] ${test.name} is recommended as it could significantly impact the diagnosis.`;
+      recommendation = '[RECOMMENDED] ' + test.name + ' is recommended as it could significantly impact the diagnosis.';
     } else {
-      recommendation = `[NOT RECOMMENDED] ${test.name} could provide additional information but is not strongly recommended.`;
+      recommendation = '[NOT RECOMMENDED] ' + test.name + ' could provide additional information but is not strongly recommended.';
     }
 
     // Format details
