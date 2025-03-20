@@ -16,6 +16,13 @@ const BLOOD_TESTS: BloodTest[] = [
   { name: 'Amyloid PET Scan', positiveLR: 12, negativeLR: 0.2, threshold: 5 },
 ];
 
+function RecommendationText({ testName, isRecommended }: { testName: string; isRecommended: boolean }) {
+  if (isRecommended) {
+    return <span>{testName} is recommended as it could significantly impact the diagnosis.</span>;
+  }
+  return <span>{testName} could provide additional information but is not strongly recommended.</span>;
+}
+
 export default function DementiaRiskCalculator() {
   const [initialRisk, setInitialRisk] = useState<string>('');
   const [age, setAge] = useState<string>('');
@@ -78,7 +85,7 @@ export default function DementiaRiskCalculator() {
     // Check if pre-test probability is below threshold
     if (adjustedRisk * 100 < test.threshold) {
       setResult({
-        recommendation: '[NOT RECOMMENDED] ' + test.name + ' could provide additional information but is not strongly recommended.',
+        recommendation: '[NOT RECOMMENDED] ' + test.name,
         details: `Patient Age: ${patientAge}\n` +
                 `Baseline Risk: ${formatPercentage(baselineRisk)}%\n` +
                 `Doctor&apos;s Estimated Probability: ${formatPercentage(risk)}%\n` +
@@ -98,9 +105,9 @@ export default function DementiaRiskCalculator() {
     // Determine recommendation
     let recommendation = '';
     if (probabilityGap > 0.3) {
-      recommendation = '[RECOMMENDED] ' + test.name + ' is recommended as it could significantly impact the diagnosis.';
+      recommendation = '[RECOMMENDED] ' + test.name;
     } else {
-      recommendation = '[NOT RECOMMENDED] ' + test.name + ' could provide additional information but is not strongly recommended.';
+      recommendation = '[NOT RECOMMENDED] ' + test.name;
     }
 
     // Format details
@@ -185,7 +192,13 @@ export default function DementiaRiskCalculator() {
             <div className="mt-6 space-y-4">
               <div className="p-4 bg-blue-50 rounded-md border border-blue-200">
                 <h2 className="text-lg font-semibold text-blue-800 mb-2">Recommendation</h2>
-                <p className="text-blue-700">{result.recommendation}</p>
+                <p className="text-blue-700">
+                  {result.recommendation}{' '}
+                  <RecommendationText 
+                    testName={selectedTest} 
+                    isRecommended={result.recommendation.startsWith('[RECOMMENDED]')} 
+                  />
+                </p>
               </div>
               
               <div className="p-4 bg-gray-50 rounded-md border border-gray-200">
