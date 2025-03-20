@@ -24,10 +24,13 @@ function RecommendationText({ isRecommended }: { isRecommended: boolean }) {
 }
 
 export default function DementiaRiskCalculator() {
-  const [initialRisk, setInitialRisk] = useState<string>('');
-  const [age, setAge] = useState<string>('');
+  const [initialRisk, setInitialRisk] = useState<number>(0);
+  const [age, setAge] = useState<number>(0);
   const [selectedTest, setSelectedTest] = useState<string>('');
-  const [result, setResult] = useState<{ recommendation: string; details: string } | null>(null);
+  const [result, setResult] = useState<{
+    recommendation: string;
+    details: string;
+  } | null>(null);
 
   const getBaselineRisk = (age: number): number => {
     if (age < 60) return 3;
@@ -46,8 +49,8 @@ export default function DementiaRiskCalculator() {
   };
 
   const calculateRisk = () => {
-    const risk = parseFloat(initialRisk) / 100; // Convert to decimal
-    const patientAge = parseInt(age);
+    const risk = parseFloat(initialRisk.toString()) / 100; // Convert to decimal
+    const patientAge = parseInt(age.toString());
 
     if (isNaN(risk) || isNaN(patientAge)) {
       setResult({
@@ -135,30 +138,35 @@ export default function DementiaRiskCalculator() {
         
         <div className="bg-white rounded-lg shadow-md p-6 space-y-6">
           <div>
-            <label htmlFor="initialRisk" className="block text-sm font-medium text-gray-700 mb-2">
-              Doctor&apos;s Estimated Dementia Probability (%)
+            <label htmlFor="initialRisk" className="block text-sm font-medium text-gray-700 mb-1">
+              Doctor Estimated Dementia Probability (%)
             </label>
             <input
               type="number"
               id="initialRisk"
               value={initialRisk}
-              onChange={(e) => setInitialRisk(e.target.value)}
+              onChange={(e) => setInitialRisk(Number(e.target.value))}
+              min="0"
+              max="100"
+              step="0.1"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-              placeholder="Enter initial probability percentage"
+              placeholder="Enter probability (0-100)"
             />
           </div>
 
           <div>
-            <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
-              Patient&apos;s Age
+            <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">
+              Patient Age
             </label>
             <input
               type="number"
               id="age"
               value={age}
-              onChange={(e) => setAge(e.target.value)}
+              onChange={(e) => setAge(Number(e.target.value))}
+              min="0"
+              max="120"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-              placeholder="Enter patient&apos;s age"
+              placeholder="Enter patient age"
             />
           </div>
 
