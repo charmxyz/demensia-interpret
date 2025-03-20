@@ -18,9 +18,9 @@ const BLOOD_TESTS: BloodTest[] = [
 
 function RecommendationText({ isRecommended }: { isRecommended: boolean }) {
   if (isRecommended) {
-    return <span>The dementia test is recommended as it will significantly impact the diagnosis.</span>;
+    return <span>This test is recommended for diagnosis.</span>;
   }
-  return <span>The dementia test will provide additional information but is not strongly recommended.</span>;
+  return <span>This test is not strongly recommended.</span>;
 }
 
 export default function DementiaRiskCalculator() {
